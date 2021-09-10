@@ -1,3 +1,5 @@
+/* eslint-disable */
+import { Dashboard } from '@material-ui/icons';
 import { Suspense, lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import AuthGuard from './components/AuthGuard';
@@ -24,6 +26,7 @@ const BrowseColors = Loadable(lazy(() => import('./pages/browse/BrowseColors')))
 const BrowseDetailLists = Loadable(lazy(() => import('./pages/browse/BrowseDetailLists')));
 const BrowseForms = Loadable(lazy(() => import('./pages/browse/BrowseForms')));
 const BrowseGridLists = Loadable(lazy(() => import('./pages/browse/BrowseGridLists')));
+
 const BrowseGroupedLists = Loadable(lazy(() => import('./pages/browse/BrowseGroupedLists')));
 const BrowseInputs = Loadable(lazy(() => import('./pages/browse/BrowseInputs')));
 const BrowseModals = Loadable(lazy(() => import('./pages/browse/BrowseModals')));
@@ -32,7 +35,6 @@ const BrowseTables = Loadable(lazy(() => import('./pages/browse/BrowseTables')))
 const BrowseTypography = Loadable(lazy(() => import('./pages/browse/BrowseTypography')));
 
 // Authentication pages
-
 const Login = Loadable(lazy(() => import('./pages/authentication/Login')));
 const PasswordRecovery = Loadable(lazy(() => import('./pages/authentication/PasswordRecovery')));
 const PasswordReset = Loadable(lazy(() => import('./pages/authentication/PasswordReset')));
@@ -93,6 +95,14 @@ const Contact = Loadable(lazy(() => import('./pages/Contact')));
 const Home = Loadable(lazy(() => import('./pages/Home')));
 const Pricing = Loadable(lazy(() => import('./pages/Pricing')));
 
+
+const Execute = Loadable(lazy(() => import('./pages/Execute')));
+const Export = Loadable(lazy(() => import('./pages/Export')));
+const Media = Loadable(lazy(() => import('./pages/Media')));
+const Recap = Loadable(lazy(() => import('./pages/Recap')));
+const Admin = Loadable(lazy(() => import('./pages/admin')));
+
+
 const routes = [
   {
     path: 'authentication',
@@ -141,7 +151,11 @@ const routes = [
     children: [
       {
         path: '/',
-        element: <BlogPostList />
+        element: (
+          <AuthGuard>
+            <DashboardLayout />
+          </AuthGuard>
+        ),
       },
       {
         path: 'new',
@@ -180,6 +194,26 @@ const routes = [
       {
         path: 'calendar',
         element: <Calendar />
+      },      
+      {
+        path: 'execute',
+        element: <Execute />
+      },
+      {
+        path: 'export',
+        element: <Export />
+      },
+      {
+        path: 'media',
+        element: <Media />
+      },
+      {
+        path: 'recaps',
+        element: <Recap />
+      },
+       {
+        path: 'admin',
+        element: <Admin />
       },
       {
         path: 'chat',
@@ -349,7 +383,7 @@ const routes = [
     children: [
       {
         path: '/',
-        element: <Home />
+        element: <DashboardLayout />
       },
       {
         path: 'browse',

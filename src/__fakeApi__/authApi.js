@@ -4,11 +4,43 @@ import wait from '../utils/wait';
 
 const users = [
   {
-    id: '5e86809283e28b96d2d38537',
+    id: '1',
     avatar: '/static/mock-images/avatars/avatar-jane_rotanson.png',
-    email: 'demo@devias.io',
-    name: 'Jane Rotanson',
-    password: 'Password123!',
+    email: 'user1@demo.com',
+    name: 'User One',
+    password: 'password',
+    plan: 'Premium'
+  },
+  {
+    id: '2',
+    avatar: '/static/mock-images/avatars/avatar-jane_rotanson.png',
+    email: 'user2@demo.com',
+    name: 'User Two',
+    password: 'password',
+    plan: 'Premium'
+  },
+  {
+    id: '3',
+    avatar: '/static/mock-images/avatars/avatar-jane_rotanson.png',
+    email: 'user3@demo.com',
+    name: 'User Three',
+    password: 'password',
+    plan: 'Premium'
+  },
+  {
+    id: '4',
+    avatar: '/static/mock-images/avatars/avatar-jane_rotanson.png',
+    email: 'user4@demo.com',
+    name: 'User Four',
+    password: 'password',
+    plan: 'Premium'
+  },
+  {
+    id: '5',
+    avatar: '/static/mock-images/avatars/avatar-jane_rotanson.png',
+    email: 'admin@demo.com',
+    name: 'Admin',
+    password: 'password',
     plan: 'Premium'
   }
 ];

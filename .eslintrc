@@ -12,9 +12,12 @@
     "airbnb"
   ],
   "rules": {
+    "linebreak-style": 0,
     "class-methods-use-this": "off",
     "comma-dangle": "off",
     "import/no-cycle": "off",
+    "no-unused-vars": "off",
+    "object-curly-spacing": ["error", "never"],
     "import/no-extraneous-dependencies": "off",
     "import/order": "off",
     "import/prefer-default-export": "off",

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useEffect } from 'react';
 import { useRoutes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
@@ -13,6 +14,9 @@ import useSettings from './hooks/useSettings';
 import gtm from './lib/gtm';
 import routes from './routes';
 import { createCustomTheme } from './theme';
+
+import Login from './pages/authentication/Login'
+
 
 const App = () => {
   const content = useRoutes(routes);
@@ -38,7 +42,7 @@ const App = () => {
         <CssBaseline />
         <Toaster position="top-center" />
         <SettingsDrawer />
-        {auth.isInitialized ? content : <SplashScreen />}
+        {auth.isAuthenticated ? content : <Login />}
       </RTL>
     </ThemeProvider>
   );
