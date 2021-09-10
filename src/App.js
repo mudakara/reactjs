@@ -41,7 +41,7 @@ const App = () => {
       <RTL direction={settings.direction}>
         <CssBaseline />
         <Toaster position="top-center" />
-        <SettingsDrawer />
+        {/* <SettingsDrawer /> */}
         {auth.isAuthenticated ? content : <Login />}
       </RTL>
     </ThemeProvider>

@@ -41,7 +41,7 @@ const menuItems = [
     icon: 'ChartSquareBarIcon',
     parentName: 'General',
     children: null,
-    usertype: ['retail'],
+    usertype: ['retailer'],
   },
   {
     title: 'Analytics',
@@ -49,7 +49,7 @@ const menuItems = [
     icon: 'ChartPieIcon',
     parentName: 'General',
     children: null,
-    usertype: ['retail', 'supplier'],
+    usertype: ['retailer', 'supplier'],
   },
   {
     title: 'Finance',
@@ -65,7 +65,7 @@ const menuItems = [
     icon: 'ShoppingCartIcon',
     parentName: 'Management',
     children: null,
-    usertype: ['retail'],
+    usertype: ['retailer'],
   },
   {
     title: 'Orders',
@@ -73,7 +73,7 @@ const menuItems = [
     icon: 'FolderOpenIcon',
     parentName: 'Management',
     children: null,
-    usertype: ['retail', 'distributor'],
+    usertype: ['retailer', 'distributor'],
   },
   {
     title: 'Customers',
@@ -150,14 +150,14 @@ const DashboardSidebar = (props) => {
   const [sections, setSections] = useState([]);
 
   const generateSection = () => {
-    debugger;
+
     const userId = user.id;
     const section = [];
     let userRoles = [];
 
     if(user.email === 'admin@demo.com')
     {
-      userRoles =  ['retail', 'supplier', 'distributor'];
+      userRoles =  ['retailer', 'supplier', 'distributor'];
     }
     else
     {
@@ -169,14 +169,10 @@ const DashboardSidebar = (props) => {
     }
 
     let menuGeneral = [];
-    let menuManagement = [];
-    let menuPlatform = [];
-
     userRoles.forEach((role) => {
       menuItems.filter((itm) => {return itm.usertype.indexOf(role)>-1})
         .forEach((ele) => {
-          if (ele.parentName === 'General') {
-
+          
             if(menuGeneral.filter((itm)=>{ return itm.title=== ele.title}).length==0)
             {
               menuGeneral.push({
@@ -185,34 +181,39 @@ const DashboardSidebar = (props) => {
                 icon: React.createElement(ele.icon,{fontSize:"small"}) ,
               });
             }
-           } else if (ele.parentName === 'Management') {
-            if(menuManagement.filter((itm)=>{ return itm.title=== ele.title}).length==0)
-            {
-              menuManagement.push({
-                title: ele.title,
-                path: ele.path,
-                icon: React.createElement(ele.icon,{fontSize:"small"}),
-              });
-            }            
-          } else if (ele.parentName === 'Platforms') {
-            if(menuPlatform.filter((itm)=>{return itm.title=== ele.title}).length==0)
-            {
-              menuPlatform.push({
-                title: ele.title,
-                path: ele.path,
-                icon: React.createElement(ele.icon,{fontSize:"small"}),
-              });
-            }
-           }
+          //   if(menuGeneral.filter((itm)=>{ return itm.title=== ele.title}).length==0)
+          //   {
+          //     menuGeneral.push({
+          //       title: ele.title,
+          //       path: ele.path,
+          //       icon: React.createElement(ele.icon,{fontSize:"small"}) ,
+          //     });
+          //   }
+          //  } else if (ele.parentName === 'Management') {
+          //   if(menuManagement.filter((itm)=>{ return itm.title=== ele.title}).length==0)
+          //   {
+          //     menuManagement.push({
+          //       title: ele.title,
+          //       path: ele.path,
+          //       icon: React.createElement(ele.icon,{fontSize:"small"}),
+          //     });
+          //   }            
+          // } else if (ele.parentName === 'Platforms') {
+          //   if(menuPlatform.filter((itm)=>{return itm.title=== ele.title}).length==0)
+          //   {
+          //     menuPlatform.push({
+          //       title: ele.title,
+          //       path: ele.path,
+          //       icon: React.createElement(ele.icon,{fontSize:"small"}),
+          //     });
+          //   }
+          // }
         });
     });
 
     if (menuGeneral.length > 0)
       section.push({ title: 'General', items: menuGeneral });
-    if (menuManagement.length > 0)
-      section.push({ title: 'Management', items: menuManagement });
-    if (menuPlatform.length > 0)
-      section.push({ title: 'Platforms', items: menuPlatform });
+    
 
     if (user.email === 'admin@demo.com') {
       section.push({

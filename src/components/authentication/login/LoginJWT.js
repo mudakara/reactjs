@@ -98,19 +98,6 @@ const LoginJWT = (props) => {
               Log In
             </Button>
           </Box>
-          <Box sx={{ mt: 2 }}>
-            <Alert severity="info">
-              <div>
-                Use
-                {' '}
-                <b>admin@demo.com</b>
-                {' '}
-                and password
-                {' '}
-                <b>password</b>
-              </div>
-            </Alert>
-          </Box>
         </form>
       )}
     </Formik>

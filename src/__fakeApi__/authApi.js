@@ -5,39 +5,31 @@ import wait from '../utils/wait';
 const users = [
   {
     id: '1',
-    avatar: '/static/mock-images/avatars/avatar-jane_rotanson.png',
-    email: 'user1@demo.com',
-    name: 'User One',
+    avatar: '/static/mock-images/avatars/avatar-carson_darrin.png',
+    email: 'retailer@demo.com',
+    name: 'Retailer',
     password: 'password',
     plan: 'Premium'
   },
   {
     id: '2',
-    avatar: '/static/mock-images/avatars/avatar-jane_rotanson.png',
-    email: 'user2@demo.com',
-    name: 'User Two',
+    avatar: '/static/mock-images/avatars/avatar-nasimiyu_danai.png',
+    email: 'distributor@demo.com',
+    name: 'Distributor',
     password: 'password',
     plan: 'Premium'
   },
   {
     id: '3',
-    avatar: '/static/mock-images/avatars/avatar-jane_rotanson.png',
-    email: 'user3@demo.com',
-    name: 'User Three',
+    avatar: '/static/mock-images/avatars/avatar-jie_yan_song.png',
+    email: 'supplier@demo.com',
+    name: 'Supplier',
     password: 'password',
     plan: 'Premium'
   },
   {
     id: '4',
-    avatar: '/static/mock-images/avatars/avatar-jane_rotanson.png',
-    email: 'user4@demo.com',
-    name: 'User Four',
-    password: 'password',
-    plan: 'Premium'
-  },
-  {
-    id: '5',
-    avatar: '/static/mock-images/avatars/avatar-jane_rotanson.png',
+    avatar: '/static/mock-images/avatars/avatar-alcides_antonio.png',
     email: 'admin@demo.com',
     name: 'Admin',
     password: 'password',

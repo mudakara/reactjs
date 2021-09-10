@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+/* eslint-disable */
+import { useEffect,useState  } from 'react';
 import { Helmet } from 'react-helmet-async';
 import {
   Box,
@@ -28,13 +29,62 @@ import InformationCircleIcon from '../../icons/InformationCircle';
 import PlusIcon from '../../icons/Plus';
 import UsersIcon from '../../icons/Users';
 import gtm from '../../lib/gtm';
+import useAuth from '../../hooks/useAuth';
 
 const Overview = () => {
   const { settings } = useSettings();
 
+  const [weeklyEarning,setWeeklyEarning] = useState(false);
+  const [privateWallet,setPrivateWallet] = useState(false);
+
+  const { user } = useAuth();
+
+  // const [weeklyEarning,setWeeklyEarning] = useState(false);
+
+  const manageComponentVisibility =()=>{
+
+    debugger;
+     
+    let userRoles = [];
+
+    if(user.email === 'admin@demo.com')
+    {
+      userRoles =  ['retailer', 'supplier', 'distributor'];
+    }
+    else
+    {
+      const savedRoles = (localStorage.getItem('approles') !== undefined && localStorage.getItem('approles') !== null) ? JSON.parse(localStorage.getItem('approles')) : [];
+      if(savedRoles.filter(e=>{return e.userId === user.id}).length > 0)
+      {
+        userRoles = savedRoles.filter(e=>{return e.userId === user.id})[0].roles ?? [];
+      }
+    }
+
+    var compRoles = (localStorage.getItem('appComponentPermission') !== undefined && localStorage.getItem('appComponentPermission') !== null) ? 
+                    JSON.parse(localStorage.getItem('appComponentPermission')) : [];
+   
+      let weeklyEar = compRoles.filter(e=>{return e.componentId === 1})
+      if(weeklyEar.length > 0)
+      {
+        let componetGrp = weeklyEar[0].roles;
+         setWeeklyEarning(userRoles.some(item => componetGrp.includes(item)))
+      }
+
+      let wallet = compRoles.filter(e=>{return e.componentId === 2})
+      if(wallet.length > 0)
+      {
+        let componetGrp = wallet[0].roles;
+        setPrivateWallet(userRoles.some(item => componetGrp.includes(item)))
+      }
+  }
+
   useEffect(() => {
     gtm.push({ event: 'page_view' });
+    manageComponentVisibility();
   }, []);
+
+
+
 
   return (
     <>
@@ -97,14 +147,14 @@ const Overview = () => {
               md={6}
               xs={12}
             >
-              <OverviewWeeklyEarnings />
+            { weeklyEarning && <OverviewWeeklyEarnings /> }
             </Grid>
             <Grid
               item
               md={6}
               xs={12}
             >
-              <OverviewPrivateWallet />
+             { privateWallet && <OverviewPrivateWallet /> }
             </Grid>
             <Grid
               item
