@@ -1,7 +1,19 @@
-import { useEffect } from 'react';
+/* eslint-disable */
+import React from 'react'
+import { useEffect, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Avatar, Box, Button, Divider, Drawer, Link, Typography } from '@material-ui/core';
+
+
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  Drawer,
+  Link,
+  Typography,
+} from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import useAuth from '../../hooks/useAuth';
@@ -22,165 +34,111 @@ import Logo from '../Logo';
 import NavSection from '../NavSection';
 import Scrollbar from '../Scrollbar';
 
-const sections = [
+const menuItems = [
   {
-    title: 'General',
-    items: [
-      {
-        title: 'Overview',
-        path: '/dashboard',
-        icon: <ChartSquareBarIcon fontSize="small" />
-      },
-      {
-        title: 'Analytics',
-        path: '/dashboard/analytics',
-        icon: <ChartPieIcon fontSize="small" />
-      },
-      {
-        title: 'Finance',
-        path: '/dashboard/finance',
-        icon: <ShoppingBagIcon fontSize="small" />
-      },
-      {
-        title: 'Account',
-        path: '/dashboard/account',
-        icon: <UserIcon fontSize="small" />
-      }
-    ]
+    title: 'Portal',
+    path: '/dashboard',
+    icon: 'ChartSquareBarIcon',
+    parentName: 'General',
+    children: null,
+    usertype: ['retailer'],
   },
   {
-    title: 'Management',
-    items: [
-      {
-        title: 'Customers',
-        path: '/dashboard/customers',
-        icon: <UsersIcon fontSize="small" />,
-        children: [
-          {
-            title: 'List',
-            path: '/dashboard/customers'
-          },
-          {
-            title: 'Details',
-            path: '/dashboard/customers/1'
-          },
-          {
-            title: 'Edit',
-            path: '/dashboard/customers/1/edit'
-          }
-        ]
-      },
-      {
-        title: 'Products',
-        path: '/dashboard/products',
-        icon: <ShoppingCartIcon fontSize="small" />,
-        children: [
-          {
-            title: 'List',
-            path: '/dashboard/products'
-          },
-          {
-            title: 'Create',
-            path: '/dashboard/products/new'
-          }
-        ]
-      },
-      {
-        title: 'Orders',
-        icon: <FolderOpenIcon fontSize="small" />,
-        path: '/dashboard/orders',
-        children: [
-          {
-            title: 'List',
-            path: '/dashboard/orders'
-          },
-          {
-            title: 'Details',
-            path: '/dashboard/orders/1'
-          }
-        ]
-      },
-      {
-        title: 'Invoices',
-        path: '/dashboard/invoices',
-        icon: <ReceiptIcon fontSize="small" />,
-        children: [
-          {
-            title: 'List',
-            path: '/dashboard/invoices'
-          },
-          {
-            title: 'Details',
-            path: '/dashboard/invoices/1'
-          }
-        ]
-      }
-    ]
+    title: 'Analytics',
+    path: '/dashboard/analytics',
+    icon: 'ChartPieIcon',
+    parentName: 'General',
+    children: null,
+    usertype: ['retailer', 'supplier'],
   },
   {
-    title: 'Platforms',
-    items: [
-      {
-        title: 'Projects',
-        path: '/dashboard/projects',
-        icon: <BriefcaseIcon fontSize="small" />,
-        children: [
-          {
-            title: 'Browse',
-            path: '/dashboard/projects/browse'
-          },
-          {
-            title: 'Details',
-            path: '/dashboard/projects/1'
-          },
-          {
-            title: 'Create',
-            path: '/dashboard/projects/new'
-          }
-        ]
-      },
-      {
-        title: 'Social',
-        path: '/dashboard/social',
-        icon: <ShareIcon fontSize="small" />,
-        children: [
-          {
-            title: 'Profile',
-            path: '/dashboard/social/profile'
-          },
-          {
-            title: 'Feed',
-            path: '/dashboard/social/feed'
-          }
-        ]
-      }
-    ]
+    title: 'Finance',
+    path: '/dashboard/finance',
+    icon: 'ShoppingBagIcon',
+    parentName: 'General',
+    children: null,
+    usertype: ['distributor'],
   },
   {
-    title: 'Apps',
-    items: [
-      {
-        title: 'Kanban',
-        path: '/dashboard/kanban',
-        icon: <ClipboardListIcon fontSize="small" />
-      },
-      {
-        title: 'Mail',
-        path: '/dashboard/mail',
-        icon: <MailIcon fontSize="small" />
-      },
-      {
-        title: 'Chat',
-        path: '/dashboard/chat',
-        icon: <ChatAltIcon fontSize="small" />
-      },
-      {
-        title: 'Calendar',
-        path: '/dashboard/calendar',
-        icon: <CalendarIcon fontSize="small" />
-      }
-    ]
-  }
+    title: 'Products',
+    path: '/dashboard/products',
+    icon: 'ShoppingCartIcon',
+    parentName: 'Management',
+    children: null,
+    usertype: ['retailer'],
+  },
+  {
+    title: 'Orders',
+    path: '/dashboard/orders',
+    icon: 'FolderOpenIcon',
+    parentName: 'Management',
+    children: null,
+    usertype: ['retailer', 'distributor'],
+  },
+  {
+    title: 'Customers',
+    path: '/dashboard/customers',
+    icon: 'UsersIcon',
+    parentName: 'Management',
+    children: null,
+    usertype: ['distributor'],
+  },
+  {
+    title: 'Invoices',
+    path: '/dashboard/invoices',
+    icon: 'ReceiptIcon',
+    parentName: 'Management',
+    children: null,
+    usertype: ['distributor'],
+  },
+  {
+    title: 'Social',
+    path: '/dashboard/social',
+    icon: 'ShareIcon',
+    parentName: 'Platforms',
+    children: null,
+    usertype: ['supplier'],
+  },
+  {
+    title: 'Execute',
+    path: '/dashboard/Execute',
+    icon: 'ShoppingCartIcon',
+    parentName: 'Management',
+    children: null,
+    usertype: ['supplier'],
+  },
+  {
+    title: 'Recaps',
+    path: '/dashboard/Recaps',
+    icon: 'FolderOpenIcon',
+    parentName: 'Management',
+    children: null,
+    usertype: ['supplier'],
+  },
+  {
+    title: 'Export',
+    path: '/dashboard/Export',
+    icon: 'ShoppingCartIcon',
+    parentName: 'Management',
+    children: [],
+    usertype: ['supplier'],
+  },
+  {
+    title: 'Media',
+    path: '/dashboard/Media',
+    icon: 'FolderOpenIcon',
+    parentName: 'Management',
+    children: null,
+    usertype: ['supplier'],
+  },
+  {
+    title: 'Chat',
+    path: '/dashboard/Chat',
+    icon: 'FolderOpenIcon',
+    parentName: 'Apps',
+    children: null,
+    usertype: ['supplier'],
+  },
 ];
 
 const DashboardSidebar = (props) => {
@@ -189,18 +147,108 @@ const DashboardSidebar = (props) => {
   const { user } = useAuth();
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
 
+  const [sections, setSections] = useState([]);
+
+  const generateSection = () => {
+
+    const userId = user.id;
+    const section = [];
+    let userRoles = [];
+
+    if(user.email === 'admin@demo.com')
+    {
+      userRoles =  ['retailer', 'supplier', 'distributor'];
+    }
+    else
+    {
+      const savedRoles = (localStorage.getItem('approles') !== undefined && localStorage.getItem('approles') !== null) ? JSON.parse(localStorage.getItem('approles')) : [];
+      if(savedRoles.filter(e=>{return e.userId === userId}).length > 0)
+      {
+        userRoles = savedRoles.filter(e=>{return e.userId === userId})[0].roles ?? [];
+      }
+    }
+
+    let menuGeneral = [];
+    userRoles.forEach((role) => {
+      menuItems.filter((itm) => {return itm.usertype.indexOf(role)>-1})
+        .forEach((ele) => {
+          
+            if(menuGeneral.filter((itm)=>{ return itm.title=== ele.title}).length==0)
+            {
+              menuGeneral.push({
+                title: ele.title,
+                path: ele.path,
+                icon: React.createElement(ele.icon,{fontSize:"small"}) ,
+              });
+            }
+          //   if(menuGeneral.filter((itm)=>{ return itm.title=== ele.title}).length==0)
+          //   {
+          //     menuGeneral.push({
+          //       title: ele.title,
+          //       path: ele.path,
+          //       icon: React.createElement(ele.icon,{fontSize:"small"}) ,
+          //     });
+          //   }
+          //  } else if (ele.parentName === 'Management') {
+          //   if(menuManagement.filter((itm)=>{ return itm.title=== ele.title}).length==0)
+          //   {
+          //     menuManagement.push({
+          //       title: ele.title,
+          //       path: ele.path,
+          //       icon: React.createElement(ele.icon,{fontSize:"small"}),
+          //     });
+          //   }            
+          // } else if (ele.parentName === 'Platforms') {
+          //   if(menuPlatform.filter((itm)=>{return itm.title=== ele.title}).length==0)
+          //   {
+          //     menuPlatform.push({
+          //       title: ele.title,
+          //       path: ele.path,
+          //       icon: React.createElement(ele.icon,{fontSize:"small"}),
+          //     });
+          //   }
+          // }
+        });
+    });
+
+    if (menuGeneral.length > 0)
+      section.push({ title: 'General', items: menuGeneral });
+    
+
+    if (user.email === 'admin@demo.com') {
+      section.push({
+        title: 'Settings',
+        items: [
+          {
+            title: 'Settings',
+            path: '/dashboard/admin',
+            icon: React.createElement('ChartSquareBarIcon',{fontSize:"small"}),
+          },
+        ],
+      });
+    }
+
+    setSections(section);
+  };
+
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();
     }
   }, [location.pathname]);
 
+  useEffect(() => {
+    generateSection();
+  }, []);
+
+  
+
   const content = (
     <Box
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        height: '100%'
+        height: '100%',
       }}
     >
       <Scrollbar options={{ suppressScrollX: true }}>
@@ -208,17 +256,17 @@ const DashboardSidebar = (props) => {
           sx={{
             display: {
               lg: 'none',
-              xs: 'flex'
+              xs: 'flex',
             },
             justifyContent: 'center',
-            p: 2
+            p: 2,
           }}
         >
           <RouterLink to="/">
             <Logo
               sx={{
                 height: 40,
-                width: 40
+                width: 40,
               }}
             />
           </RouterLink>
@@ -231,7 +279,7 @@ const DashboardSidebar = (props) => {
               borderRadius: 1,
               display: 'flex',
               overflow: 'hidden',
-              p: 2
+              p: 2,
             }}
           >
             <RouterLink to="/dashboard/account">
@@ -240,28 +288,17 @@ const DashboardSidebar = (props) => {
                 sx={{
                   cursor: 'pointer',
                   height: 48,
-                  width: 48
+                  width: 48,
                 }}
               />
             </RouterLink>
             <Box sx={{ ml: 2 }}>
-              <Typography
-                color="textPrimary"
-                variant="subtitle2"
-              >
+              <Typography color="textPrimary" variant="subtitle2">
                 {user.name}
               </Typography>
-              <Typography
-                color="textSecondary"
-                variant="body2"
-              >
-                Your plan:
-                {' '}
-                <Link
-                  color="primary"
-                  component={RouterLink}
-                  to="/pricing"
-                >
+              <Typography color="textSecondary" variant="body2">
+                Your plan:{' '}
+                <Link color="primary" component={RouterLink} to="/pricing">
                   {user.plan}
                 </Link>
               </Typography>
@@ -276,37 +313,12 @@ const DashboardSidebar = (props) => {
               pathname={location.pathname}
               sx={{
                 '& + &': {
-                  mt: 3
-                }
+                  mt: 3,
+                },
               }}
               {...section}
             />
           ))}
-        </Box>
-        <Divider />
-        <Box sx={{ p: 2 }}>
-          <Typography
-            color="textPrimary"
-            variant="subtitle2"
-          >
-            Need Help?
-          </Typography>
-          <Typography
-            color="textSecondary"
-            variant="body2"
-          >
-            Check our docs
-          </Typography>
-          <Button
-            color="primary"
-            component={RouterLink}
-            fullWidth
-            sx={{ mt: 2 }}
-            to="/docs"
-            variant="contained"
-          >
-            Documentation
-          </Button>
         </Box>
       </Scrollbar>
     </Box>
@@ -322,8 +334,8 @@ const DashboardSidebar = (props) => {
             backgroundColor: 'background.paper',
             height: 'calc(100% - 64px) !important',
             top: '64px !Important',
-            width: 280
-          }
+            width: 280,
+          },
         }}
         variant="permanent"
       >
@@ -340,8 +352,8 @@ const DashboardSidebar = (props) => {
       PaperProps={{
         sx: {
           backgroundColor: 'background.paper',
-          width: 280
-        }
+          width: 280,
+        },
       }}
       variant="temporary"
     >
@@ -352,7 +364,7 @@ const DashboardSidebar = (props) => {
 
 DashboardSidebar.propTypes = {
   onMobileClose: PropTypes.func,
-  openMobile: PropTypes.bool
+  openMobile: PropTypes.bool,
 };
 
 export default DashboardSidebar;

@@ -13,8 +13,8 @@ const LoginAmplify = (props) => {
   return (
     <Formik
       initialValues={{
-        email: 'demo@devias.io',
-        password: 'Password123!',
+        email: 'admin@demo.com',
+        password: 'password',
         submit: null
       }}
       validationSchema={Yup
@@ -111,11 +111,11 @@ const LoginAmplify = (props) => {
               <div>
                 You can use
                 {' '}
-                <b>demo@devias.io</b>
+                <b>admin@demo.com</b>
                 {' '}
                 and password
                 {' '}
-                <b>Password123!</b>
+                <b>password</b>
               </div>
             </Alert>
           </Box>

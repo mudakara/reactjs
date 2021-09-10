@@ -40,7 +40,7 @@ const Login = () => {
           minHeight: '100vh'
         }}
       >
-        <AuthBanner />
+        {/* <AuthBanner /> */}
         <Container
           maxWidth="sm"
           sx={{ py: '80px' }}
@@ -119,14 +119,6 @@ const Login = () => {
                 {platform === 'JWT' && <LoginJWT />}
               </Box>
               <Divider sx={{ my: 3 }} />
-              <Link
-                color="textSecondary"
-                component={RouterLink}
-                to="/authentication/register"
-                variant="body2"
-              >
-                Create new account
-              </Link>
               {platform === 'Amplify' && (
                 <Link
                   color="textSecondary"

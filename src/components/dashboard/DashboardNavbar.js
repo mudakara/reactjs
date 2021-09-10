@@ -59,7 +59,7 @@ const DashboardNavbar = (props) => {
             ml: 2
           }}
         />
-        <LanguagePopover />
+        {/* <LanguagePopover /> */}
         <Box sx={{ ml: 1 }}>
           <ContentSearch />
         </Box>

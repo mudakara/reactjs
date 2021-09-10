@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Chart from 'react-apexcharts';
 import {
   Avatar,

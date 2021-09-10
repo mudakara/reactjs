@@ -11,8 +11,8 @@ const LoginJWT = (props) => {
   return (
     <Formik
       initialValues={{
-        email: 'demo@devias.io',
-        password: 'Password123!',
+        email: 'admin@demo.com',
+        password: 'password',
         submit: null
       }}
       validationSchema={Yup
@@ -97,19 +97,6 @@ const LoginJWT = (props) => {
             >
               Log In
             </Button>
-          </Box>
-          <Box sx={{ mt: 2 }}>
-            <Alert severity="info">
-              <div>
-                Use
-                {' '}
-                <b>demo@devias.io</b>
-                {' '}
-                and password
-                {' '}
-                <b>Password123!</b>
-              </div>
-            </Alert>
           </Box>
         </form>
       )}

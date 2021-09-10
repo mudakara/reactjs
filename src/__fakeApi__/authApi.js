@@ -4,11 +4,35 @@ import wait from '../utils/wait';
 
 const users = [
   {
-    id: '5e86809283e28b96d2d38537',
-    avatar: '/static/mock-images/avatars/avatar-jane_rotanson.png',
-    email: 'demo@devias.io',
-    name: 'Jane Rotanson',
-    password: 'Password123!',
+    id: '1',
+    avatar: '/static/mock-images/avatars/avatar-carson_darrin.png',
+    email: 'retailer@demo.com',
+    name: 'Retailer',
+    password: 'password',
+    plan: 'Premium'
+  },
+  {
+    id: '2',
+    avatar: '/static/mock-images/avatars/avatar-nasimiyu_danai.png',
+    email: 'distributor@demo.com',
+    name: 'Distributor',
+    password: 'password',
+    plan: 'Premium'
+  },
+  {
+    id: '3',
+    avatar: '/static/mock-images/avatars/avatar-jie_yan_song.png',
+    email: 'supplier@demo.com',
+    name: 'Supplier',
+    password: 'password',
+    plan: 'Premium'
+  },
+  {
+    id: '4',
+    avatar: '/static/mock-images/avatars/avatar-alcides_antonio.png',
+    email: 'admin@demo.com',
+    name: 'Admin',
+    password: 'password',
     plan: 'Premium'
   }
 ];
